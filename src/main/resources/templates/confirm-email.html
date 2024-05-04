@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Welcome to DanceScape Explorer</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <style type="text/css">
+    @media screen {
+      @font-face {
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v11/qIIYRU-oROkIk8vfvxw6QvesZW2xOQ-xsNqO47m55DA.woff) format('woff');
+      }
+
+      @font-face {
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.com/s/lato/v11/qdgUG4U09HnJwhYI-uK18wLUuEpTyoUstqEm5AMlJo4.woff) format('woff');
+      }
+    }
+
+    body {
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      font-family: 'Lato', Helvetica, Arial, sans-serif;
+    }
+
+    table {
+      border-collapse: collapse !important;
+    }
+
+    img {
+      border: 0;
+      height: auto;
+      line-height: 100%;
+      outline: none;
+      text-decoration: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    h1 {
+      font-size: 28px;
+      line-height: 32px;
+      margin: 0;
+      padding-bottom: 10px;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 24px;
+      margin: 0;
+    }
+
+    .button {
+      background-color: #FF7A00;
+      color: #ffffff;
+      padding: 15px 30px;
+      border-radius: 8px;
+      display: inline-block;
+      font-size: 16px;
+      font-weight: bold;
+      text-transform: uppercase;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+      transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .button:hover {
+      background-color: #e66a00;
+      box-shadow: 0 5px 8px rgba(0, 0, 0, 0.25), 0 5px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 4px;
+    }
+
+    /* Media queries for responsiveness */
+    @media screen and (max-width: 600px) {
+      .container {
+        padding: 10px;
+      }
+
+      h1 {
+        font-size: 24px;
+        line-height: 28px;
+      }
+
+      p, .button {
+        font-size: 14px;
+      }
+
+      .button {
+        padding: 12px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<!-- Email content container -->
+<div class="container">
+  <!-- Logo -->
+  <div style="text-align: center; padding-bottom: 20px;">
+    <img src="https://www.holistic-babe.fr/wp-content/uploads/2024/03/cropped-cropped-Logo-holistic-babe-glow-up.png" alt="Holistic Babe Help Center" style="width: 200px;" />
+  </div>
+
+  <!-- Welcome message -->
+  <div style="text-align: center;">
+    <h1>Welcome, <em th:text="${username}"></em>!</h1>
+    <img src="https://img.icons8.com/clouds/100/000000/handshake.png" width="100" height="100" style="display: block; border: 0px; margin: 20px auto;" />
+  </div>
+
+  <!-- Confirmation button -->
+  <div style="text-align: center;">
+    <p>We're excited to have you get started. Please confirm your account by clicking the button below:</p>
+    <a class="button" th:href="${confirmationUrl}" target="_blank">Confirm Account</a>
+  </div>
+
+  <!-- Footer -->
+  <div style="margin-top: 30px; text-align: center; color: #666666;">
+    <p>If you have any questions, feel free to reply to this email. We're always happy to help out!</p>
+    <p>Holistic Babe Help Center</p>
+  </div>
+</div>
+</body>
+
+</html>
