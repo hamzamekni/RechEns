@@ -39,6 +39,7 @@ public class SecurityConfiguration  {
                 .authorizeHttpRequests(req ->
                         req.requestMatchers( "/user/Register","/user/auth","/user/ConfirmAccount/**","/user/forgot-password/**").permitAll()
                                 .requestMatchers("/config/disableAccount/**", "/config/enableAccount/**","/config/registerAdmin","/config/getAllUsers").hasAnyRole("ADMIN")
+                                .requestMatchers("/villes/*","/villes").permitAll()
                                 .requestMatchers("/profile/**").authenticated()
                                 .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))

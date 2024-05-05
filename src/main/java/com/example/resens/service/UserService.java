@@ -29,7 +29,7 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
     private final AuthenticationManager authenticationManager;
-    private static final String CONFIRMATION_URL = "http://localhost:8080/user/ConfirmAccount/%s";
+    private static final String CONFIRMATION_URL = "http://localhost:8081/user/ConfirmAccount/%s";
     private final PasswordEncoder passwordEncoder;
     private final EmailRegistrationService emailRegistrationService;
     private final JwtService jwtService;
