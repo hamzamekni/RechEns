@@ -6,6 +6,8 @@ import com.example.resens.enumeration.Recommendation_Score;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -21,13 +23,11 @@ public class Recommendation {
     @NonNull
     private String recommandation;
 
-    @Enumerated(EnumType.STRING)
-    private Recommendation_Score recommendationScore;
-
     @ManyToOne
-    private Teacher teacher;
-
-    @ManyToOne
+    @JoinColumn(name = "etudiant_id")
     private Etudiant etudiant;
 
+    @ManyToOne
+    @JoinColumn(name = "teacherId")
+    private Teacher teacher;
 }

@@ -3,6 +3,8 @@ package com.example.resens.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -19,12 +21,15 @@ public class Matiere {
     private Integer code_etude;
 
     @OneToOne
+    @JoinColumn(name = "demandeDeCour_id")
     private DemandeDeCour demandeDeCour;
 
     @ManyToOne
+    @JoinColumn(name = "niveauEtude_id")
     private NiveauEtude niveauEtude;
 
-    @OneToOne
-    private DemandeDeCour demandeDeCour_Matiere;
+    @ManyToMany(mappedBy = "matieres")
+    Set<Teacher> teachers;
+
 
 }

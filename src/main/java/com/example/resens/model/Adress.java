@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -25,6 +26,15 @@ public class Adress {
     @JoinColumn(name = "region_id")
     private Region region;
 
-    @OneToOne(mappedBy = "adress")
-    private User user;
+    @OneToOne
+    @JoinColumn(name = "demandeDeCour_id")
+    private DemandeDeCour demandeDeCour;
+
+    @ManyToMany
+    @JoinTable(
+            name = "regions",
+            joinColumns = @JoinColumn(name = "adress_id"),
+            inverseJoinColumns = @JoinColumn(name = "region_id"))
+    Set<Region> regions;
+
 }

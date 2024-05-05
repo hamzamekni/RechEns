@@ -16,7 +16,11 @@ public class RecommendationServiceImpl implements RecommendationService {
 
     @Override
     public Recommendation saveRecommendation(Recommendation recommendation) {
-        return recommendationRepository.save(recommendation);
+        Recommendation r = new Recommendation();
+        r.setEtudiant(recommendation.getEtudiant());
+        r.setTeacher(recommendation.getTeacher());
+        r.setRecommendationId(recommendation.getRecommendationId());
+        return recommendationRepository.save(r);
     }
 
     @Override

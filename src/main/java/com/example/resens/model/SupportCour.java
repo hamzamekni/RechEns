@@ -17,6 +17,5 @@ public class SupportCour {
     private String signe_cours;
     @NonNull
     private String type_cours;
-    @ManyToOne
-    private DemandeDeCour demandeDeCour;
+
 }

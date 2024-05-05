@@ -3,6 +3,8 @@ package com.example.resens.model;
 import com.example.resens.enumeration.Statut_Etude_Presentiel;
 import lombok.*;
 import jakarta.persistence.*;
+
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -31,6 +33,27 @@ public class Teacher {
     @NonNull
     private String Detail_Enseigant;
 
-    @OneToMany(mappedBy = "teacher") // Corrected mappedBy attribute
-    private Set<DemandeDeCour> demandeDeCours;
+    @OneToMany
+    @JoinColumn(name = "demandeDeCour_id")
+    private List<DemandeDeCour> demandeDeCours;
+
+    @ManyToOne
+    @JoinColumn(name = "recommendation_id")
+    private Recommendation recommendation;
+
+    @OneToMany
+    @JoinColumn(name = "paiementId")
+    private List<Paiement> paiements;
+
+    @OneToOne
+    @JoinColumn(name = "userId")
+    private User user;
+
+    @ManyToMany
+    @JoinTable(
+            name = "matieres",
+            joinColumns = @JoinColumn(name = "teacherId"),
+            inverseJoinColumns = @JoinColumn(name = "matiere_id"))
+    Set<Matiere> matieres;
+
 }

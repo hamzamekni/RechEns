@@ -24,31 +24,20 @@ public class Etudiant {
     @NonNull
     private String Section;
 
-    @JsonBackReference
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "matiere",
-            joinColumns = @JoinColumn(name = "etudiant_id"),
-            inverseJoinColumns = @JoinColumn(name = "matiere_id")
-    )
-    private List<Matiere> matiere;
-
-    @JsonBackReference
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "niveau",
-            joinColumns = @JoinColumn(name = "etudiant_id"),
-            inverseJoinColumns = @JoinColumn(name = "niveauEtude_Id")
-    )
-    private List<NiveauEtude> niveau;
-
-    @ManyToOne
-    private DemandeDeCour demandeDeCour_Etudiant;
-
-    @OneToMany(mappedBy = "etudiant")
-    private List<Paiement> paiement;
-
-    @OneToMany(mappedBy = "etudiant")
+    @OneToMany
+    @JoinColumn(name = "recommandation_id")
     private List<Recommendation> recommendation;
+
+    @OneToMany
+    @JoinColumn(name = "paiementId")
+    private List<Paiement> paiements;
+
+    @OneToMany
+    @JoinColumn(name = "demandeDeCour_id")
+    private List<DemandeDeCour> demandeDeCours;
+
+    @OneToOne
+    @JoinColumn(name = "userId")
+    private User users;
 
 }

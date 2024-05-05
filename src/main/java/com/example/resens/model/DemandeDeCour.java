@@ -1,6 +1,7 @@
 package com.example.resens.model;
 
 import com.example.resens.enumeration.Statut_Demande;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,24 +28,28 @@ public class DemandeDeCour {
     @NonNull
     private Float prix_min;
 
-    @OneToOne
-    private Adress adress;
 
     @Enumerated(EnumType.STRING)
     private Statut_Demande statutDemande;
 
-    @OneToMany(mappedBy = "demandeDeCour_Etudiant")
-    private List<Etudiant> etudiants;
+    @OneToOne
+    @JoinColumn(name = "adress_id")
+    private Adress adress;
 
-    @OneToOne(mappedBy = "demandeDeCour_Matiere")
+    @OneToOne
+    @JoinColumn(name = "matiere_id")
     private Matiere matiere;
 
-    @ManyToOne
-    private Teacher teacher; // Corrected field type and name
+    @OneToMany
+    @JoinColumn(name = "supportCour_id")
+    private List<SupportCour> supportCour;
 
     @ManyToOne
-    @JoinColumn(name = "adress")
-    private Adress adress_DemandeDeCour;
+    @JoinColumn(name = "etudiant_id")
+    private Etudiant etudiant;
 
+    @ManyToOne
+    @JoinColumn(name = "teacherId")
+    private Teacher teacher;
 
 }

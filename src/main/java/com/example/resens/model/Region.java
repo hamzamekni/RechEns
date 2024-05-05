@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -21,6 +22,8 @@ public class Region {
     @JoinColumn(name = "ville_id")
     private Ville villes;
 
+    @ManyToMany(mappedBy = "regions")
+    Set<Adress> adresses;
 
 
 }
