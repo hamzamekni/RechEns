@@ -21,19 +21,10 @@ public class Adress {
     private String road_adress;
 
 
-    @JsonBackReference
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "region",
-            joinColumns = @JoinColumn(name = "region_Id"),
-            inverseJoinColumns = @JoinColumn(name = "adress_Id")
-    )
-    private List<Region> regions;
+    @ManyToOne
+    @JoinColumn(name = "region_id")
+    private Region region;
 
     @OneToOne(mappedBy = "adress")
     private User user;
-
-    @OneToMany(mappedBy = "adress_DemandeDeCour")
-    private List<DemandeDeCour> demandeDeCours;
-
 }

@@ -43,5 +43,8 @@ public class DemandeDeCour {
     private Teacher teacher; // Corrected field type and name
 
     @ManyToOne
+    @JoinColumn(name = "adress")
     private Adress adress_DemandeDeCour;
+
+
 }

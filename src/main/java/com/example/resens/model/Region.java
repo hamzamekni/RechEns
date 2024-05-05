@@ -1,5 +1,6 @@
 package com.example.resens.model;
 
+import com.nimbusds.openid.connect.sdk.claims.Address;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,11 +18,9 @@ public class Region {
     private Long region_Id;
 
     @ManyToOne
-    @NonNull
-    private Ville ville;
+    @JoinColumn(name = "ville_id")
+    private Ville villes;
 
-    //many to many with Adress
-    @ManyToMany(mappedBy = "regions")
-    private List<Adress> adresses;
+
 
 }

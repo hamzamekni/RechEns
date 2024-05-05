@@ -16,6 +16,4 @@ public class Ville {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ville_Id;
 
-    @OneToMany(mappedBy = "ville")
-    private List<Region> regions;
 }
