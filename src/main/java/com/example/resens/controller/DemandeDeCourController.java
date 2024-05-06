@@ -15,8 +15,14 @@ public class DemandeDeCourController {
     private DemandeDeCourService demandeDeCourService;
 
     @PostMapping
-    public DemandeDeCour saveDemandeDeCour(@RequestBody DemandeDeCour demandeDeCour) {
-        return demandeDeCourService.saveDemandeDeCour(demandeDeCour);
+    public DemandeDeCour saveDemandeDeCour(@RequestBody DemandeDeCour demandeDeCour,
+                                           @RequestParam Long adress_id, Long matiere_id,
+                                           @RequestParam Long etudiant_id,
+                                           @RequestParam Long teacherId) {
+        System.out.println("1");
+        return demandeDeCourService.saveDemandeDeCour(demandeDeCour, adress_id, matiere_id,
+                                                                                etudiant_id,
+                                                                                teacherId);
     }
 
     @PutMapping("/{id}")

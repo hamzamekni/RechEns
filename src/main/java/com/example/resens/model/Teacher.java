@@ -33,13 +33,6 @@ public class Teacher {
     @NonNull
     private String Detail_Enseigant;
 
-    @OneToMany
-    @JoinColumn(name = "demandeDeCour_id")
-    private List<DemandeDeCour> demandeDeCours;
-
-    @OneToMany
-    @JoinColumn(name = "paiementId")
-    private List<Paiement> paiements;
 
     @OneToOne
     @JoinColumn(name = "userId", referencedColumnName = "userId")

@@ -24,14 +24,6 @@ public class Etudiant {
     @NonNull
     private String Section;
 
-    @OneToMany
-    @JoinColumn(name = "paiementId")
-    private List<Paiement> paiements;
-
-    @OneToMany
-    @JoinColumn(name = "demandeDeCour_id")
-    private List<DemandeDeCour> demandeDeCours;
-
     @OneToOne
     @JoinColumn(name = "userId")
     private User users;

@@ -25,8 +25,8 @@ public class RegionController {
     }
 
     @PostMapping
-    public Region saveRegion(@RequestBody Region region) {
-        return regionService.saveRegion(region);
+    public Region saveRegion(@RequestBody Region region, @RequestParam Long ville_id) {
+        return regionService.saveRegion(region,ville_id);
     }
 
     @PutMapping("/{id}")

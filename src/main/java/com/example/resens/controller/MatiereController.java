@@ -25,8 +25,8 @@ public class MatiereController {
     }
 
     @PostMapping
-    public Matiere saveMatiere(@RequestBody Matiere matiere) {
-        return matiereService.saveMatiere(matiere);
+    public Matiere saveMatiere(@RequestBody Matiere matiere,@RequestParam Long niveau_etude_id) {
+        return matiereService.saveMatiere(matiere, niveau_etude_id);
     }
 
     @DeleteMapping("/{id}")

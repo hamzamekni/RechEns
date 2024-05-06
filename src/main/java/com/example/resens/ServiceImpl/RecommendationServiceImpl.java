@@ -27,6 +27,7 @@ public class RecommendationServiceImpl implements RecommendationService {
     public Recommendation saveRecommendation(Recommendation recommendation, Long etudiantId, Long teacherId) {
         Optional<Etudiant> optionalEtudiant = etudiantRepository.findById(etudiantId);
         Optional<Teacher> optionalTeacher = teacherRepository.findById(teacherId);
+        System.out.println(optionalTeacher);
         if (optionalEtudiant.isPresent()){
             recommendation.setEtudiant(optionalEtudiant.get());
         }

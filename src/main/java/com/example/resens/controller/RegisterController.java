@@ -18,7 +18,7 @@ public class RegisterController {
     public ResponseEntity<RegisterResponse> registerUser(@RequestBody RegisterRequest registerRequest) {
         RegisterResponse registerResponse  = new RegisterResponse();
         try {
-            userService.registerAccount(registerRequest, Role.ROLE_USER);
+            userService.registerAccount(registerRequest, Role.ROLE_ETUDIANT);
             registerResponse.setEmailResponse(registerRequest.getEmail());
             registerResponse.setMessageResponse("Account Created");
             return ResponseEntity.status(HttpStatus.CREATED).body(registerResponse);
@@ -27,7 +27,7 @@ public class RegisterController {
             registerResponse.setEmailResponse(registerRequest.getEmail());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(registerResponse);
         } catch (Exception e) {
-            registerResponse.setMessageResponse("An error occurred while registering user.");
+            registerResponse.setMessageResponse(e.getMessage());
             registerResponse.setEmailResponse(registerRequest.getEmail());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(registerResponse);

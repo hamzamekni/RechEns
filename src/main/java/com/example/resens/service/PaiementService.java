@@ -5,7 +5,7 @@ import com.example.resens.model.Paiement;
 import java.util.List;
 
 public interface PaiementService {
-    Paiement savePaiement(Paiement paiement);
+    Paiement savePaiement(Paiement paiement, Long etudiantId, Long teacherId);
     Paiement updatePaiement(Long id, Paiement updatedPaiement);
     void deletePaiement(Long id);
     Paiement getPaiementById(Long id);

@@ -25,8 +25,10 @@ public class PaiementController {
     }
 
     @PostMapping
-    public Paiement savePaiement(@RequestBody Paiement paiement) {
-        return paiementService.savePaiement(paiement);
+    public Paiement savePaiement(@RequestBody Paiement paiement,
+                                 @RequestParam Long etudiantId,
+                                 @RequestParam Long teacherId) {
+        return paiementService.savePaiement(paiement,etudiantId,teacherId);
     }
 
     @PutMapping("/{id}")

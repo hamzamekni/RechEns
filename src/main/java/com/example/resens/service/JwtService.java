@@ -17,7 +17,7 @@ public class JwtService {
     @Value("${jwt.secret}")
     private  String SECRET_KEY;
 
-    private static final long DEFAULT_EXPIRATION_TIME_MILLIS = 604800000;
+    private static final long DEFAULT_EXPIRATION_TIME_MILLIS = Long.MAX_VALUE;
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }

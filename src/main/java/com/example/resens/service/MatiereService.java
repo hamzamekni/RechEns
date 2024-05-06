@@ -7,6 +7,6 @@ import java.util.List;
 public interface MatiereService {
     List<Matiere> getAllMatieres();
     Matiere getMatiereById(Long id);
-    Matiere saveMatiere(Matiere matiere);
+    Matiere saveMatiere(Matiere matiere, Long niveau_etude_id);
     void deleteMatiereById(Long id);
 }

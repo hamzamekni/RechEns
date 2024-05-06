@@ -1,7 +1,9 @@
 package com.example.resens.ServiceImpl;
 
 import com.example.resens.model.Matiere;
+import com.example.resens.model.NiveauEtude;
 import com.example.resens.repository.MatiereRepository;
+import com.example.resens.repository.NiveauEtudeRepository;
 import com.example.resens.service.MatiereService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,8 @@ import java.util.Optional;
 public class MatiereServiceImpl implements MatiereService {
     @Autowired
     private MatiereRepository matiereRepository;
+    @Autowired
+    private NiveauEtudeRepository niveauEtudeRepository;
 
     @Override
     public List<Matiere> getAllMatieres() {
@@ -26,7 +30,12 @@ public class MatiereServiceImpl implements MatiereService {
     }
 
     @Override
-    public Matiere saveMatiere(Matiere matiere) {
+    public Matiere saveMatiere(Matiere matiere, Long niveau_etude_id) {
+        Optional<NiveauEtude> optionalNiveauEtude = niveauEtudeRepository.findById(niveau_etude_id);
+
+        if (optionalNiveauEtude.isPresent()){
+            matiere.setNiveauEtude(optionalNiveauEtude.get());
+        }
         return matiereRepository.save(matiere);
     }
 

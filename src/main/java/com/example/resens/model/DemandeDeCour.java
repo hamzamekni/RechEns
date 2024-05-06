@@ -32,17 +32,14 @@ public class DemandeDeCour {
     @Enumerated(EnumType.STRING)
     private Statut_Demande statutDemande;
 
-    @OneToOne
-    @JoinColumn(name = "adress_id")
+    @ManyToOne
+    @JoinColumn(name = "adress_id", referencedColumnName = "adress_id")
     private Adress adress;
 
-    @OneToOne
-    @JoinColumn(name = "matiere_id")
+    @ManyToOne
+    @JoinColumn(name = "matiere_id", referencedColumnName = "matiere_id")
     private Matiere matiere;
 
-    @OneToMany
-    @JoinColumn(name = "supportCour_id")
-    private List<SupportCour> supportCour;
 
     @ManyToOne
     @JoinColumn(name = "etudiant_id", referencedColumnName = "etudiant_id")
