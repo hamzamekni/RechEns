@@ -1,11 +1,11 @@
 package com.example.resens.service;
 import com.example.resens.config.PasswordEncoder;
-import com.example.resens.dto.AuthenticationResponse;
-import com.example.resens.dto.AuthenticationRequest;
-import com.example.resens.dto.ProfileResponse;
-import com.example.resens.dto.RegisterRequest;
+import com.example.resens.dto.*;
 import com.example.resens.enumeration.Role;
+import com.example.resens.exceptions.TeacherException;
+import com.example.resens.model.Teacher;
 import com.example.resens.model.User;
+import com.example.resens.repository.TeacherRepository;
 import com.example.resens.repository.UserRepository;
 import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
@@ -28,8 +28,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final TeacherRepository teacherRepository;
     private final AuthenticationManager authenticationManager;
     private static final String CONFIRMATION_URL = "http://localhost:8081/user/ConfirmAccount/%s";
+    private static final String CONFIRM_TEACHER_URL = "http://localhost:8081/user/ConfirmTeacher/%s";
+
     private final PasswordEncoder passwordEncoder;
     private final EmailRegistrationService emailRegistrationService;
     private final JwtService jwtService;
@@ -66,6 +69,61 @@ public class UserService {
             e.printStackTrace();
         }
 
+    }
+
+    @Transactional
+    public void registerTeacher(RegisterTeacherRequest request, Role role) {
+        boolean userExists = userRepository.findByEmail(request.getEmail()).isPresent();
+        if (userExists) {
+            throw new UserException("A user already exists with the same email");
+        }
+        var teacher = Teacher.builder()
+                .firstName(request.getFirstName())
+                .email(request.getEmail())
+                .montantNonPaye(request.getMontantNonPaye())
+                .statut_etude_presentiel(request.getStatut_etude_presentiel())
+                .detailEtudePresentiel(request.getDetailEtudePresentiel())
+                .detailEnseigant(request.getDetailEnseigant())
+                .phoneNumber(request.getPhoneNumber())
+                .password(passwordEncoder.bCryptPasswordEncoder().encode(request.getPassword()))
+                .role(role)
+                .enabled(false)
+                .build();
+        teacherRepository.save(teacher);
+        var jwtToken = jwtService.genToken(teacher,new HashMap<>());
+        try {
+            emailRegistrationService.sendToTeacher(
+                    "hamzamekni4@gmail.com",
+                    teacher.getFirstName(),
+                    teacher.getEmail(),
+                    teacher.getDetailEnseigant(),
+                    teacher.getPhoneNumber(),
+                    teacher.getMatieres(),
+                    "confirm-teacher",
+                    String.format(CONFIRM_TEACHER_URL, jwtToken)
+            );
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public String confirmTeacher(String token) {
+
+        String userEmail = jwtService.extractUsername(token);
+        Teacher teacher = teacherRepository.findByEmail(userEmail)
+                .orElseThrow(()->new TeacherException("Teacher not found"+ userEmail));
+        if (!teacher.isEnabled()) {
+            teacher.setEnabled(true);
+            teacherRepository.save(teacher);
+            return "successfully";
+        }
+        else if (!teacher.isEnabled() && jwtService.isTokenExpired(token)){
+            return handleExpiredToken(userEmail,token);
+        }
+        else {
+            return "already";
+        }
     }
 
     public String confirmAccount(String token) {
