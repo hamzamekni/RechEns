@@ -25,10 +25,6 @@ public class Etudiant {
     private String Section;
 
     @OneToMany
-    @JoinColumn(name = "recommandation_id")
-    private List<Recommendation> recommendation;
-
-    @OneToMany
     @JoinColumn(name = "paiementId")
     private List<Paiement> paiements;
 

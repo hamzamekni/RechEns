@@ -45,11 +45,11 @@ public class DemandeDeCour {
     private List<SupportCour> supportCour;
 
     @ManyToOne
-    @JoinColumn(name = "etudiant_id")
+    @JoinColumn(name = "etudiant_id", referencedColumnName = "etudiant_id")
     private Etudiant etudiant;
 
     @ManyToOne
-    @JoinColumn(name = "teacherId")
+    @JoinColumn(name = "teacherId", referencedColumnName = "teacherId")
     private Teacher teacher;
 
 }

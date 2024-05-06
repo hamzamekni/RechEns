@@ -1,26 +1,39 @@
 package com.example.resens.ServiceImpl;
 
+import com.example.resens.model.Etudiant;
 import com.example.resens.model.Recommendation;
+import com.example.resens.model.Teacher;
+import com.example.resens.repository.EtudiantRepository;
 import com.example.resens.repository.RecommendationRepository;
+import com.example.resens.repository.TeacherRepository;
 import com.example.resens.service.RecommendationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RecommendationServiceImpl implements RecommendationService {
 
     @Autowired
     private RecommendationRepository recommendationRepository;
+    @Autowired
+    private EtudiantRepository etudiantRepository;
+    @Autowired
+    private TeacherRepository teacherRepository;
 
     @Override
-    public Recommendation saveRecommendation(Recommendation recommendation) {
-        Recommendation r = new Recommendation();
-        r.setEtudiant(recommendation.getEtudiant());
-        r.setTeacher(recommendation.getTeacher());
-        r.setRecommendationId(recommendation.getRecommendationId());
-        return recommendationRepository.save(r);
+    public Recommendation saveRecommendation(Recommendation recommendation, Long etudiantId, Long teacherId) {
+        Optional<Etudiant> optionalEtudiant = etudiantRepository.findById(etudiantId);
+        Optional<Teacher> optionalTeacher = teacherRepository.findById(teacherId);
+        if (optionalEtudiant.isPresent()){
+            recommendation.setEtudiant(optionalEtudiant.get());
+        }
+        if (optionalTeacher.isPresent()){
+            recommendation.setTeacher(optionalTeacher.get());
+        }
+        return recommendationRepository.save(recommendation);
     }
 
     @Override

@@ -19,7 +19,7 @@ public class Region {
     private Long region_Id;
 
     @ManyToOne
-    @JoinColumn(name = "ville_id")
+    @JoinColumn(name = "ville_id", referencedColumnName = "ville_id")
     private Ville villes;
 
     @ManyToMany(mappedBy = "regions")

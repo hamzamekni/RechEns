@@ -21,20 +21,16 @@ public class Adress {
     @NonNull
     private String road_adress;
 
-
     @ManyToOne
     @JoinColumn(name = "region_id")
     private Region region;
 
-    @OneToOne
-    @JoinColumn(name = "demandeDeCour_id")
-    private DemandeDeCour demandeDeCour;
 
     @ManyToMany
     @JoinTable(
             name = "regions",
-            joinColumns = @JoinColumn(name = "adress_id"),
-            inverseJoinColumns = @JoinColumn(name = "region_id"))
+            joinColumns = @JoinColumn(name = "adress_id", referencedColumnName = "adress_id"),
+            inverseJoinColumns = @JoinColumn(name = "region_id", referencedColumnName = "region_id"))
     Set<Region> regions;
 
 }

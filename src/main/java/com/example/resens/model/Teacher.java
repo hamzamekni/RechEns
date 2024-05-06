@@ -37,23 +37,19 @@ public class Teacher {
     @JoinColumn(name = "demandeDeCour_id")
     private List<DemandeDeCour> demandeDeCours;
 
-    @ManyToOne
-    @JoinColumn(name = "recommendation_id")
-    private Recommendation recommendation;
-
     @OneToMany
     @JoinColumn(name = "paiementId")
     private List<Paiement> paiements;
 
     @OneToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "userId", referencedColumnName = "userId")
     private User user;
 
     @ManyToMany
     @JoinTable(
             name = "matieres",
-            joinColumns = @JoinColumn(name = "teacherId"),
-            inverseJoinColumns = @JoinColumn(name = "matiere_id"))
+            joinColumns = @JoinColumn(name = "teacherId", referencedColumnName = "teacherId"),
+            inverseJoinColumns = @JoinColumn(name = "matiere_id", referencedColumnName = "matiere_id"))
     Set<Matiere> matieres;
 
 }

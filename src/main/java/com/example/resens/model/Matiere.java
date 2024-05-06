@@ -20,12 +20,9 @@ public class Matiere {
     @NonNull
     private Integer code_etude;
 
-    @OneToOne
-    @JoinColumn(name = "demandeDeCour_id")
-    private DemandeDeCour demandeDeCour;
 
     @ManyToOne
-    @JoinColumn(name = "niveauEtude_id")
+    @JoinColumn(name = "niveauEtude_id", referencedColumnName = "niveauEtude_id")
     private NiveauEtude niveauEtude;
 
     @ManyToMany(mappedBy = "matieres")
