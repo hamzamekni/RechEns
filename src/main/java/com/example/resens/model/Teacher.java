@@ -29,7 +29,7 @@ public class Teacher implements UserDetails {
     private String email;
 
     @NonNull
-    private float montantNonPaye;
+    private float montant_non_paye;
 
     @Enumerated(EnumType.STRING)
     private Statut_Etude_Presentiel statut_etude_presentiel;
@@ -48,6 +48,9 @@ public class Teacher implements UserDetails {
     private Role role;
 
     private boolean enabled;
+
+    private String filePath;
+
 
     @Override
     public boolean isEnabled() {
@@ -88,6 +91,16 @@ public class Teacher implements UserDetails {
     @Override
     public boolean isCredentialsNonExpired() {
         return false;
+    }
+
+    // Add a method to handle file upload
+    public void uploadFile(String filePath) {
+        this.filePath = filePath;
+    }
+
+    // Add a method to get the file path
+    public String getFilePath() {
+        return filePath;
     }
 
 

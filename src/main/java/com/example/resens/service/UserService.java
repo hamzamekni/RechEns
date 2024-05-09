@@ -81,7 +81,7 @@ public class UserService {
         var teacher = Teacher.builder()
                 .firstName(request.getFirstName())
                 .email(request.getEmail())
-                .montantNonPaye(request.getMontantNonPaye())
+                .montant_non_paye(request.getMontantNonPaye())
                 .statut_etude_presentiel(request.getStatut_etude_presentiel())
                 .detailEtudePresentiel(request.getDetailEtudePresentiel())
                 .detailEnseigant(request.getDetailEnseigant())
