@@ -2,6 +2,7 @@ package com.example.resens.service;
 import com.example.resens.config.PasswordEncoder;
 import com.example.resens.dto.*;
 import com.example.resens.enumeration.Role;
+import com.example.resens.enumeration.Statut_Etude_Presentiel;
 import com.example.resens.exceptions.TeacherException;
 import com.example.resens.model.Teacher;
 import com.example.resens.model.User;
@@ -32,6 +33,8 @@ public class UserService {
     private final AuthenticationManager authenticationManager;
     private static final String CONFIRMATION_URL = "http://localhost:8081/user/ConfirmAccount/%s";
     private static final String CONFIRM_TEACHER_URL = "http://localhost:8081/user/ConfirmTeacher/%s";
+    private static final String DELETE_TEACHER_URL = "http://localhost:8081/teachers/deleteTeacher/%s";
+
 
     private final PasswordEncoder passwordEncoder;
     private final EmailRegistrationService emailRegistrationService;
@@ -100,7 +103,9 @@ public class UserService {
                     teacher.getPhoneNumber(),
                     teacher.getMatieres(),
                     "confirm-teacher",
-                    String.format(CONFIRM_TEACHER_URL, jwtToken)
+                    String.format(CONFIRM_TEACHER_URL, jwtToken),
+                    teacher.getTeacherId(),
+                    DELETE_TEACHER_URL
             );
         } catch (MessagingException e) {
             e.printStackTrace();
@@ -115,6 +120,7 @@ public class UserService {
                 .orElseThrow(()->new TeacherException("Teacher not found"+ userEmail));
         if (!teacher.isEnabled()) {
             teacher.setEnabled(true);
+            teacher.setStatut_etude_presentiel(Statut_Etude_Presentiel.valueOf("ACCEPTED"));
             teacherRepository.save(teacher);
             return "successfully";
         }

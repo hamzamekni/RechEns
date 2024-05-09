@@ -135,11 +135,10 @@
     <!-- Footer -->
     <div style="margin-top: 30px; text-align: center; color: #666666;">
         <p>If Not Here Is His Contact Info Feel Free To Send Him An Email Explaining Why Not</p>
-
-        <p>User Name: <p th:text="${username}"> </p></p>
-        <p>Email: <p th:text="${email}"> </p></p>
-        <p>Phone Number: <p th:text="${phoneNumber}"> </p> </p>
-
+        User Name: <p th:text="${username}"> </p>
+        Email: <p th:text="${email}"> </p>
+        Phone Number: <p th:text="${phoneNumber}"> </p>
+        <a class="button" th:href="@{'http://localhost:8081/teachers/deleteTeacher/' + ${teacherId}}" target="_blank">Reject Demand</a>
         <p>Find A Teacher App</p>
     </div>
 </div>

@@ -34,8 +34,9 @@ public class TeacherController {
         return teacherService.updateTeacher(id, updatedTeacher);
     }
 
-    @DeleteMapping("/{id}")
+    @GetMapping("/deleteTeacher/{id}")
     public void deleteTeacher(@PathVariable Long id) {
+        System.out.println("Teacher Deleted");
         teacherService.deleteTeacher(id);
     }
 }

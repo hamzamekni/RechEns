@@ -13,11 +13,17 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.Arrays;
+import java.util.Collections;
+
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class SecurityConfiguration  {
+public class SecurityConfiguration implements WebMvcConfigurer {
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
     @Bean
@@ -27,6 +33,8 @@ public class SecurityConfiguration  {
         config.addAllowedOrigin("*");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
+        config.setAllowedOrigins(Collections.singletonList("*"));
+        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
@@ -37,7 +45,7 @@ public class SecurityConfiguration  {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req ->
-                        req.requestMatchers( "/user/Register","/user/auth","/user/ConfirmAccount/**","/user/forgot-password/**","/user/RegisterTeacher/**","/user/ConfirmTeacher/**").permitAll()
+                        req.requestMatchers( "/user/Register","/user/auth","/user/ConfirmAccount/**","/user/forgot-password/**","/user/RegisterTeacher/**","/user/ConfirmTeacher/**","/teachers/**","/teachers/**").permitAll()
                                 .requestMatchers("/config/disableAccount/**", "/config/enableAccount/**","/config/registerAdmin","/config/getAllUsers").hasAnyRole("ADMIN")
                                 .requestMatchers("/villes/*","/villes").permitAll()
                                 .requestMatchers("/profile/**").authenticated()
@@ -50,5 +58,11 @@ public class SecurityConfiguration  {
                     e.accessDeniedHandler(customAccessDeniedHandler);
                 });
         return httpSecurity.build();
+    }
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/teachers/deleteTeacher/27")
+                .allowedOrigins("*")
+                .allowCredentials(false);
     }
 }

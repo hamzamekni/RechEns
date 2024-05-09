@@ -54,7 +54,9 @@ public class EmailRegistrationService {
     }
 
 
-    public void sendToTeacher(String mail, String firstName, String email, String detailEnseigant, Integer phoneNumber, Set<Matiere> matieres, String templateName, String confirmTeacherUrl)throws MessagingException {
+    public void sendToTeacher(String mail, String firstName, String email, String detailEnseigant,
+                              Integer phoneNumber, Set<Matiere> matieres, String templateName,
+                              String confirmTeacherUrl, Long teacherId, String deleteTeacherUrl)throws MessagingException {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(
                 mimeMessage,
@@ -62,12 +64,13 @@ public class EmailRegistrationService {
                 StandardCharsets.UTF_8.name()
         );
         Map<String, Object> properties = new HashMap<>();
+        properties.put("teacherId",teacherId);
         properties.put("username", firstName);
         properties.put("email", email);
         properties.put("detailEnseigant", detailEnseigant);
         properties.put("phoneNumber", phoneNumber);
         properties.put("matieres", matieres);
-
+        properties.put("deleteTeacherUrl",deleteTeacherUrl);
         properties.put("confirmationUrl", confirmTeacherUrl);
         Context context = new Context();
         context.setVariables(properties);
