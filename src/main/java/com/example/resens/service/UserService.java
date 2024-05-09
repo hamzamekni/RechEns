@@ -11,6 +11,7 @@ import com.example.resens.repository.UserRepository;
 import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -20,10 +21,7 @@ import com.example.resens.exceptions.UserException;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -35,7 +33,7 @@ public class UserService {
     private static final String CONFIRM_TEACHER_URL = "http://localhost:8081/user/ConfirmTeacher/%s";
     private static final String DELETE_TEACHER_URL = "http://localhost:8081/teachers/deleteTeacher/%s";
 
-
+    @Autowired
     private final PasswordEncoder passwordEncoder;
     private final EmailRegistrationService emailRegistrationService;
     private final JwtService jwtService;
@@ -88,7 +86,7 @@ public class UserService {
                 .detailEtudePresentiel(request.getDetailEtudePresentiel())
                 .detailEnseigant(request.getDetailEnseigant())
                 .phoneNumber(request.getPhoneNumber())
-                .password(passwordEncoder.bCryptPasswordEncoder().encode(request.getPassword()))
+                .password(passwordEncoder.encode(request.getPassword()))
                 .role(role)
                 .enabled(false)
                 .build();
@@ -122,7 +120,18 @@ public class UserService {
             teacher.setEnabled(true);
             teacher.setStatut_etude_presentiel(Statut_Etude_Presentiel.valueOf("ACCEPTED"));
             teacherRepository.save(teacher);
+            var user = User.builder()
+                    .firstName(teacher.getFirstName())
+                    .lastName(teacher.getFirstName())
+                    .email(teacher.getEmail())
+                    .phoneNumber(teacher.getPhoneNumber())
+                    .password(passwordEncoder.bCryptPasswordEncoder().encode(passwordEncoder.decodePassword(teacher.getPassword())))
+                    .role(teacher.getRole())
+                    .enabled(teacher.isEnabled())
+                    .build();
+            userRepository.save(user);
             return "successfully";
+
         }
         else if (!teacher.isEnabled() && jwtService.isTokenExpired(token)){
             return handleExpiredToken(userEmail,token);
