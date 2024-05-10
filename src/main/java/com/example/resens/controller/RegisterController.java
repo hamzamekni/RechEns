@@ -8,8 +8,11 @@ import com.example.resens.exceptions.UserException;
 import com.example.resens.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
@@ -35,16 +38,17 @@ public class RegisterController {
         }
     }
     @PostMapping("/RegisterTeacher")
-    public ResponseEntity<RegisterResponse> registerTeacher(@RequestBody RegisterTeacherRequest registerRequest) {
-        System.out.println("Hello");
-        System.out.println(registerRequest);
+    public ResponseEntity<RegisterResponse> registerTeacher(@RequestBody RegisterTeacherRequest registerRequest,
+                                                            @RequestParam("file") MultipartFile file) {
+
+        System.out.println(file);
         RegisterResponse registerResponse  = new RegisterResponse();
         try {
-            userService.registerTeacher(registerRequest, Role.ROLE_TEACHER);
+            userService.registerTeacher(registerRequest, Role.ROLE_TEACHER, file);
             registerResponse.setEmailResponse(registerRequest.getEmail());
             registerResponse.setMessageResponse("Account Created");
             return ResponseEntity.status(HttpStatus.CREATED).body(registerResponse);
-        }catch (UserException e) {
+        } catch (UserException e) {
             registerResponse.setMessageResponse(e.getMessage());
             registerResponse.setEmailResponse(registerRequest.getEmail());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(registerResponse);
@@ -55,6 +59,7 @@ public class RegisterController {
                     .body(registerResponse);
         }
     }
+
     @GetMapping("/ConfirmAccount/{token}")
     public ResponseEntity<ConfirmationResponse> confirmUser(@PathVariable String token) {
         ConfirmationResponse confirmationMessage = new ConfirmationResponse();

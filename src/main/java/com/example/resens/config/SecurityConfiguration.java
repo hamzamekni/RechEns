@@ -65,4 +65,5 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                 .allowedOrigins("*")
                 .allowCredentials(false);
     }
+
 }

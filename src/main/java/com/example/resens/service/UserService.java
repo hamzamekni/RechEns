@@ -8,6 +8,7 @@ import com.example.resens.model.Teacher;
 import com.example.resens.model.User;
 import com.example.resens.repository.TeacherRepository;
 import com.example.resens.repository.UserRepository;
+import com.example.resens.util.FileUtils;
 import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -73,7 +74,7 @@ public class UserService {
     }
 
     @Transactional
-    public void registerTeacher(RegisterTeacherRequest request, Role role) {
+    public void registerTeacher(RegisterTeacherRequest request, Role role, MultipartFile file) throws IOException {
         boolean userExists = userRepository.findByEmail(request.getEmail()).isPresent();
         if (userExists) {
             throw new UserException("A user already exists with the same email");
@@ -89,7 +90,10 @@ public class UserService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(role)
                 .enabled(false)
+                .filePath(FileUtils.compressImage(file.getBytes()))
                 .build();
+
+
         teacherRepository.save(teacher);
         var jwtToken = jwtService.genToken(teacher,new HashMap<>());
         try {

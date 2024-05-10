@@ -49,7 +49,9 @@ public class Teacher implements UserDetails {
 
     private boolean enabled;
 
-    private String filePath;
+    @Lob
+    @Column(name = "filePath",length = 1000)
+    private byte[] filePath;
 
 
     @Override
@@ -93,15 +95,7 @@ public class Teacher implements UserDetails {
         return false;
     }
 
-    // Add a method to handle file upload
-    public void uploadFile(String filePath) {
-        this.filePath = filePath;
-    }
 
-    // Add a method to get the file path
-    public String getFilePath() {
-        return filePath;
-    }
 
 
 }

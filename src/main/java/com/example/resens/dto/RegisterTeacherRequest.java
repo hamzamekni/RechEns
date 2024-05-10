@@ -5,6 +5,8 @@ import com.example.resens.model.Adress;
 import jakarta.persistence.Lob;
 import lombok.*;
 import com.example.resens.enumeration.Role;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.Date;
 @Data
 @Builder
@@ -21,5 +23,6 @@ public class RegisterTeacherRequest {
     private String password;
     private boolean enabled;
     private Role role;
+    private MultipartFile file;
 
 }
