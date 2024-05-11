@@ -30,6 +30,7 @@ import java.util.Objects;
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200")
 public class AuthenticationController {
     @Value("${jwt.secret}")
     private  String SECRET_KEY;
@@ -115,6 +116,7 @@ public class AuthenticationController {
     @PostMapping("/auth")
     public ResponseEntity<?> authenticate(@RequestBody AuthenticationRequest request) {
         try {
+            System.out.println(request);
             AuthenticationResponse response = userService.authenticate(request);
             return ResponseEntity.ok(response);
         } catch (UserException e) {

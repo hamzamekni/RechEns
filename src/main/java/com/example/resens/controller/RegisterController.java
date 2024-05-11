@@ -38,13 +38,12 @@ public class RegisterController {
         }
     }
     @PostMapping("/RegisterTeacher")
-    public ResponseEntity<RegisterResponse> registerTeacher(@RequestBody RegisterTeacherRequest registerRequest,
-                                                            @RequestParam("file") MultipartFile file) {
+    public ResponseEntity<RegisterResponse> registerTeacher(@RequestBody RegisterTeacherRequest registerRequest
+                                                            ) {
 
-        System.out.println(file);
         RegisterResponse registerResponse  = new RegisterResponse();
         try {
-            userService.registerTeacher(registerRequest, Role.ROLE_TEACHER, file);
+            userService.registerTeacher(registerRequest, Role.ROLE_TEACHER);
             registerResponse.setEmailResponse(registerRequest.getEmail());
             registerResponse.setMessageResponse("Account Created");
             return ResponseEntity.status(HttpStatus.CREATED).body(registerResponse);

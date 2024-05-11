@@ -49,9 +49,9 @@ public class Teacher implements UserDetails {
 
     private boolean enabled;
 
-    @Lob
-    @Column(name = "filePath",length = 1000)
-    private byte[] filePath;
+    //@Lob
+    //@Column(name = "filePath",length = 1000)
+    //private byte[] filePath;
 
 
     @Override

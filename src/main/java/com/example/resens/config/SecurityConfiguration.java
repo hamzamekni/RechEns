@@ -26,22 +26,29 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 public class SecurityConfiguration implements WebMvcConfigurer {
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
+    private CorsConfiguration corsConfiguration;
+
+
+
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("*");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
-        config.setAllowedOrigins(Collections.singletonList("*"));
+        config.setAllowedOriginPatterns(Collections.singletonList("*")); // Use allowedOriginPatterns instead of allowedOrigins
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
+
         return new CorsFilter(source);
     }
 
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, CustomAuthenticationEntryPoint customEntryPoint, CustomAccessDeniedHandler customAccessDeniedHandler) throws Exception{
+    SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity,
+                                            CustomAuthenticationEntryPoint customEntryPoint,
+                                            CustomAccessDeniedHandler customAccessDeniedHandler) throws Exception{
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req ->
@@ -61,9 +68,12 @@ public class SecurityConfiguration implements WebMvcConfigurer {
     }
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/teachers/deleteTeacher/27")
+        registry.addMapping("/user/auth")
                 .allowedOrigins("*")
-                .allowCredentials(false);
+                .allowedHeaders("*")
+                .allowedMethods("GET", "POST")
+                .allowCredentials(true)
+                .allowedOrigins("http://localhost:4200");
     }
 
 }

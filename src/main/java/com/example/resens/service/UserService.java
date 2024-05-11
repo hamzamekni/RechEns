@@ -74,7 +74,7 @@ public class UserService {
     }
 
     @Transactional
-    public void registerTeacher(RegisterTeacherRequest request, Role role, MultipartFile file) throws IOException {
+    public void registerTeacher(RegisterTeacherRequest request, Role role) throws IOException {
         boolean userExists = userRepository.findByEmail(request.getEmail()).isPresent();
         if (userExists) {
             throw new UserException("A user already exists with the same email");
@@ -90,7 +90,6 @@ public class UserService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(role)
                 .enabled(false)
-                .filePath(FileUtils.compressImage(file.getBytes()))
                 .build();
 
 
@@ -134,6 +133,17 @@ public class UserService {
                     .enabled(teacher.isEnabled())
                     .build();
             userRepository.save(user);
+            var jwtToken = jwtService.genToken(user,new HashMap<>());
+            try {
+                emailRegistrationService.send(
+                        user.getEmail(),
+                        user.getFirstName(),
+                        "confirmed-teacher",
+                        String.format(CONFIRMATION_URL, jwtToken)
+                );
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
             return "successfully";
 
         }
@@ -189,7 +199,7 @@ public class UserService {
                     )
             );
         } catch (AuthenticationException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage()+"aa");
             throw new UserException(e.getMessage());
         }
         var user = userRepository.getUserByEmail(request.getEmail());

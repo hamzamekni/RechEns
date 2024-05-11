@@ -23,6 +23,5 @@ public class RegisterTeacherRequest {
     private String password;
     private boolean enabled;
     private Role role;
-    private MultipartFile file;
 
 }
