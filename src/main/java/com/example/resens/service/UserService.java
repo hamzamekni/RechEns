@@ -90,6 +90,7 @@ public class UserService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(role)
                 .enabled(false)
+                .uploadedUrls(request.getUploadedUrls())
                 .build();
 
 

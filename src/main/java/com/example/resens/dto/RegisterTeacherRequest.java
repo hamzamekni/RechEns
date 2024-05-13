@@ -8,6 +8,8 @@ import com.example.resens.enumeration.Role;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -23,5 +25,5 @@ public class RegisterTeacherRequest {
     private String password;
     private boolean enabled;
     private Role role;
-
+    private List uploadedUrls;
 }

@@ -52,7 +52,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req ->
-                        req.requestMatchers( "/user/Register","/user/auth","/user/ConfirmAccount/**","/user/forgot-password/**","/user/RegisterTeacher/**","/user/ConfirmTeacher/**","/teachers/**","/teachers/**").permitAll()
+                        req.requestMatchers( "/user/Register","/user/auth","/user/ConfirmAccount/**","/user/forgot-password/**","/user/RegisterTeacher/**","/user/ConfirmTeacher/**","/teachers/**","/teachers/**","/file").permitAll()
                                 .requestMatchers("/config/disableAccount/**", "/config/enableAccount/**","/config/registerAdmin","/config/getAllUsers").hasAnyRole("ADMIN")
                                 .requestMatchers("/villes/*","/villes").permitAll()
                                 .requestMatchers("/profile/**").authenticated()

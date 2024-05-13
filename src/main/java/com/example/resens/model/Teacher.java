@@ -7,7 +7,9 @@ import lombok.*;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -49,9 +51,8 @@ public class Teacher implements UserDetails {
 
     private boolean enabled;
 
-    //@Lob
-    //@Column(name = "filePath",length = 1000)
-    //private byte[] filePath;
+    @ElementCollection
+    private List<String> uploadedUrls = new ArrayList<>();
 
 
     @Override
