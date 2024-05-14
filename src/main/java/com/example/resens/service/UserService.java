@@ -74,7 +74,7 @@ public class UserService {
     }
 
     @Transactional
-    public void registerTeacher(RegisterTeacherRequest request, Role role) throws IOException {
+    public void registerTeacher(RegisterTeacherRequest request, Role role, Statut_Etude_Presentiel status) throws IOException {
         boolean userExists = userRepository.findByEmail(request.getEmail()).isPresent();
         if (userExists) {
             throw new UserException("A user already exists with the same email");
@@ -83,7 +83,7 @@ public class UserService {
                 .firstName(request.getFirstName())
                 .email(request.getEmail())
                 .montant_non_paye(request.getMontantNonPaye())
-                .statut_etude_presentiel(request.getStatut_etude_presentiel())
+                .statut_etude_presentiel(status)
                 .detailEtudePresentiel(request.getDetailEtudePresentiel())
                 .detailEnseigant(request.getDetailEnseigant())
                 .phoneNumber(request.getPhoneNumber())
@@ -103,7 +103,6 @@ public class UserService {
                     teacher.getEmail(),
                     teacher.getDetailEnseigant(),
                     teacher.getPhoneNumber(),
-                    teacher.getMatieres(),
                     "confirm-teacher",
                     String.format(CONFIRM_TEACHER_URL, jwtToken),
                     teacher.getTeacherId(),

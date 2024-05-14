@@ -55,7 +55,7 @@ public class EmailRegistrationService {
 
 
     public void sendToTeacher(String mail, String firstName, String email, String detailEnseigant,
-                              Integer phoneNumber, Set<Matiere> matieres, String templateName,
+                              Integer phoneNumber, String templateName,
                               String confirmTeacherUrl, Long teacherId, String deleteTeacherUrl)throws MessagingException {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(
@@ -69,7 +69,6 @@ public class EmailRegistrationService {
         properties.put("email", email);
         properties.put("detailEnseigant", detailEnseigant);
         properties.put("phoneNumber", phoneNumber);
-        properties.put("matieres", matieres);
         properties.put("deleteTeacherUrl",deleteTeacherUrl);
         properties.put("confirmationUrl", confirmTeacherUrl);
         Context context = new Context();

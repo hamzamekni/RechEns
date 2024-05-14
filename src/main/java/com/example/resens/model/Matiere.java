@@ -25,8 +25,8 @@ public class Matiere {
     @JoinColumn(name = "niveauEtude_id", referencedColumnName = "niveauEtude_id")
     private NiveauEtude niveauEtude;
 
-    @ManyToMany(mappedBy = "matieres")
-    Set<Teacher> teachers;
+    @ManyToOne
+    private Teacher teacher;
 
 
 }

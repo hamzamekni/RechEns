@@ -4,6 +4,7 @@ import com.example.resens.dto.RegisterRequest;
 import com.example.resens.dto.RegisterResponse;
 import com.example.resens.dto.RegisterTeacherRequest;
 import com.example.resens.enumeration.Role;
+import com.example.resens.enumeration.Statut_Etude_Presentiel;
 import com.example.resens.exceptions.UserException;
 import com.example.resens.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -43,7 +44,7 @@ public class RegisterController {
 
         RegisterResponse registerResponse  = new RegisterResponse();
         try {
-            userService.registerTeacher(registerRequest, Role.ROLE_TEACHER);
+            userService.registerTeacher(registerRequest, Role.ROLE_TEACHER, Statut_Etude_Presentiel.PENDING);
             registerResponse.setEmailResponse(registerRequest.getEmail());
             registerResponse.setMessageResponse("Account Created");
             return ResponseEntity.status(HttpStatus.CREATED).body(registerResponse);

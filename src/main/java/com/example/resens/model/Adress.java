@@ -26,11 +26,5 @@ public class Adress {
     private Region region;
 
 
-    @ManyToMany
-    @JoinTable(
-            name = "regions",
-            joinColumns = @JoinColumn(name = "adress_id", referencedColumnName = "adress_id"),
-            inverseJoinColumns = @JoinColumn(name = "region_id", referencedColumnName = "region_id"))
-    Set<Region> regions;
 
 }

@@ -22,8 +22,6 @@ public class Region {
     @JoinColumn(name = "ville_id", referencedColumnName = "ville_id")
     private Ville villes;
 
-    @ManyToMany(mappedBy = "regions")
-    Set<Adress> adresses;
 
 
 }

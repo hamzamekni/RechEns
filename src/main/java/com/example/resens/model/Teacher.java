@@ -60,13 +60,6 @@ public class Teacher implements UserDetails {
         return enabled;
     }
 
-    @ManyToMany
-    @JoinTable(
-            name = "matieres",
-            joinColumns = @JoinColumn(name = "teacherId", referencedColumnName = "teacherId"),
-            inverseJoinColumns = @JoinColumn(name = "matiere_id", referencedColumnName = "matiere_id"))
-    Set<Matiere> matieres;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
