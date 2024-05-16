@@ -104,6 +104,7 @@
             .button {
                 padding: 12px 20px;
             }
+
         }
     </style>
 </head>
@@ -113,7 +114,7 @@
 <div class="container">
     <!-- Logo -->
     <div style="text-align: center; padding-bottom: 20px;">
-        <img src="https://www.holistic-babe.fr/wp-content/uploads/2024/03/cropped-cropped-Logo-holistic-babe-glow-up.png" alt="Holistic Babe Help Center" style="width: 200px;" />
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiIz8SFt3jzrGvUgrp33iAYWDay_BxQJHdgrY0t1iUB3ITKV7PyqkQn974fc0mAh9Ks_-BXB8_kLNmGmQgLhzg4z6jTJepiTeC-WctVgL708La2_4ddiVPS9qUC8OkJpkxL_xq77a8eEH2hHSCklBI-vKEyDOUaFU4a3zvwUo2v8S5sjOVpvN0P3kinDtA/s500/Logo%20bleu.png" alt="Logo" style="width: 200px;">
     </div>
 
     <!-- Welcome message -->
@@ -139,6 +140,10 @@
         Email: <p th:text="${email}"> </p>
         Phone Number: <p th:text="${phoneNumber}"> </p>
         <a class="button" th:href="@{'http://localhost:8081/teachers/deleteTeacher/' + ${teacherId}}" target="_blank">Reject Demand</a>
+        <H2>Here Is All The Files Of The User That Wants To Be A Teacher </H2>
+        <div th:each="uploadedUrl : ${uploadedUrls}">
+            <img th:src="${uploadedUrl}">
+        </div>
         <p>Find A Teacher App</p>
     </div>
 </div>

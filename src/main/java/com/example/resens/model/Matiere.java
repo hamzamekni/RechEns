@@ -18,6 +18,9 @@ public class Matiere {
     private Long matiere_Id;
 
     @NonNull
+    private String matiere_name;
+
+    @NonNull
     private Integer code_etude;
 
 

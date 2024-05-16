@@ -43,4 +43,6 @@ public class TeacherServiceImpl implements TeacherService {
     public List<Teacher> getAllTeachers() {
         return teacherRepository.findAll();
     }
+
+
 }

@@ -10,4 +10,5 @@ public interface TeacherService {
     void deleteTeacher(Long id);
     Teacher getTeacherById(Long id);
     List<Teacher> getAllTeachers();
+
 }

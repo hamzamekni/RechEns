@@ -52,13 +52,14 @@ public class SecurityConfiguration implements WebMvcConfigurer {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req ->
-                        req.requestMatchers( "/user/Register","/user/auth","/user/ConfirmAccount/**","/user/forgot-password/**","/user/RegisterTeacher/**","/user/ConfirmTeacher/**",
+                        req.requestMatchers( "/user/Register","/user/auth","/user/ConfirmAccount/**","/user/forgot-password/**",
+                                        "/user/RegisterTeacher/**","/user/ConfirmTeacher/**",
                                         "/teachers/**","/teachers/deleteTeacher/**","/file","/demandeDeCours","/demandeDeCours/**",
                                         "/adresses","/adresses/**","/etudiants","/etudiants/**","/matieres","/matieres/**",
                                         "/niveauEtudes","/niveauEtudes/**","/paiements","/paiements/**",
                                         "/recommendations","/recommendations/**","/regions","/regions/**",
                                         "/villes","/villes/**","/support-cours","/support-cours/**").permitAll()
-                                .requestMatchers("/config/disableAccount/**", "/config/enableAccount/**","/config/registerAdmin","/config/getAllUsers").permitAll()
+                                .requestMatchers("/config/**","/config/disableAccount/**", "/config/enableAccount/**","/config/registerAdmin","/config/getAllUsers").permitAll()
                                 .requestMatchers("/villes/*","/villes").permitAll()
                                 .requestMatchers("/profile/**").authenticated()
                                 .anyRequest().authenticated())

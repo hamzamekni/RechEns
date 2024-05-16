@@ -30,6 +30,16 @@ public class MatiereServiceImpl implements MatiereService {
     }
 
     @Override
+    public Matiere updateMatiere(Long id, Matiere updatedMatiere) {
+        Matiere existingMatiere = matiereRepository.findById(id).orElse(null);
+        if (existingMatiere != null) {
+            updatedMatiere.setMatiere_Id(existingMatiere.getMatiere_Id());
+            return matiereRepository.save(updatedMatiere);
+        }
+        return null;
+    }
+
+    @Override
     public Matiere saveMatiere(Matiere matiere, Long niveau_etude_id) {
         Optional<NiveauEtude> optionalNiveauEtude = niveauEtudeRepository.findById(niveau_etude_id);
 

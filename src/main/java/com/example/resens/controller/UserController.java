@@ -4,6 +4,7 @@ import com.example.resens.dto.RegisterRequest;
 import com.example.resens.dto.RegisterResponse;
 import com.example.resens.enumeration.Role;
 import com.example.resens.exceptions.UserException;
+import com.example.resens.model.Teacher;
 import com.example.resens.model.User;
 import com.example.resens.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -92,5 +93,13 @@ public class UserController {
         }
     }
 
+    @GetMapping("/{email}")
+    public User getUserByEmail(@PathVariable String email) {
+        return userService.getUserByEmail(email);
+    }
 
+    @PutMapping("/{id}")
+    public User updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
+        return userService.updateUserById(id, updatedUser);
+    }
 }

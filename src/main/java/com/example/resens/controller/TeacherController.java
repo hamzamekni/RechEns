@@ -39,4 +39,5 @@ public class TeacherController {
         System.out.println("Teacher Deleted");
         teacherService.deleteTeacher(id);
     }
+
 }

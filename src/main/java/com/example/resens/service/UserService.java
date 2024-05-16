@@ -106,6 +106,7 @@ public class UserService {
                     "confirm-teacher",
                     String.format(CONFIRM_TEACHER_URL, jwtToken),
                     teacher.getTeacherId(),
+                    teacher.getUploadedUrls(),
                     DELETE_TEACHER_URL
             );
         } catch (MessagingException e) {
@@ -225,6 +226,16 @@ public class UserService {
     }
     public void updateUser(User user)  {
         userRepository.save(user);
+    }
+
+
+    public User updateUserById(Long id, User updatedUser) {
+        User existingUser = userRepository.findById(id).orElse(null);
+        if (existingUser != null) {
+            updatedUser.setUserId(existingUser.getUserId());
+            return userRepository.save(updatedUser);
+        }
+        return null;
     }
     public ProfileResponse getProfile(Authentication authentication)
     {

@@ -13,6 +13,7 @@ import org.thymeleaf.spring6.SpringTemplateEngine;
 
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -56,7 +57,7 @@ public class EmailRegistrationService {
 
     public void sendToTeacher(String mail, String firstName, String email, String detailEnseigant,
                               Integer phoneNumber, String templateName,
-                              String confirmTeacherUrl, Long teacherId, String deleteTeacherUrl)throws MessagingException {
+                              String confirmTeacherUrl, Long teacherId, List<String> uploadedUrls, String deleteTeacherUrl)throws MessagingException {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(
                 mimeMessage,
@@ -71,6 +72,7 @@ public class EmailRegistrationService {
         properties.put("phoneNumber", phoneNumber);
         properties.put("deleteTeacherUrl",deleteTeacherUrl);
         properties.put("confirmationUrl", confirmTeacherUrl);
+        properties.put("uploadedUrls",uploadedUrls);
         Context context = new Context();
         context.setVariables(properties);
 
