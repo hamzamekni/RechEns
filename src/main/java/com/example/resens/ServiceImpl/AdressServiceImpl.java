@@ -39,7 +39,7 @@ public class AdressServiceImpl implements AdressService {
     public Adress updateAdress(Long id, Adress updatedAdress) {
         Adress existingAdress = adressRepository.findById(id).orElse(null);
         if (existingAdress != null) {
-            updatedAdress.setAdress_Id(existingAdress.getAdress_Id());
+            updatedAdress.setAdressId(existingAdress.getAdressId());
             return adressRepository.save(updatedAdress);
         }
         return null;

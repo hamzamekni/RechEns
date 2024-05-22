@@ -1,11 +1,8 @@
 package com.example.resens.model;
 
 import com.example.resens.enumeration.Statut_Demande;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.List;
 
 @Entity
 @Getter
@@ -33,16 +30,16 @@ public class DemandeDeCour {
     private Statut_Demande statutDemande;
 
     @ManyToOne
-    @JoinColumn(name = "adress_id", referencedColumnName = "adress_id")
+    @JoinColumn(name = "adressId", referencedColumnName = "adressId")
     private Adress adress;
 
     @ManyToOne
-    @JoinColumn(name = "matiere_id", referencedColumnName = "matiere_id")
+    @JoinColumn(name = "matiereId", referencedColumnName = "matiereId")
     private Matiere matiere;
 
 
     @ManyToOne
-    @JoinColumn(name = "etudiant_id", referencedColumnName = "etudiant_id")
+    @JoinColumn(name = "etudiantId", referencedColumnName = "etudiantId")
     private Etudiant etudiant;
 
     @ManyToOne

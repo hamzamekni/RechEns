@@ -23,7 +23,7 @@ public class EtudiantServiceImpl implements EtudiantService {
     public Etudiant updateEtudiant(Long id, Etudiant updatedEtudiant) {
         Etudiant existingEtudiant = etudiantRepository.findById(id).orElse(null);
         if (existingEtudiant != null) {
-            updatedEtudiant.setEtudiant_Id(existingEtudiant.getEtudiant_Id());
+            updatedEtudiant.setEtudiantId(existingEtudiant.getEtudiantId());
             return etudiantRepository.save(updatedEtudiant);
         }
         return null;

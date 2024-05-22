@@ -14,5 +14,6 @@ public class RegisterResponse {
     private String messageResponse;
     private String emailResponse;
 
+
 }
 

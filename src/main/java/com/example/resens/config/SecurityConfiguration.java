@@ -53,8 +53,9 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req ->
                         req.requestMatchers( "/user/Register","/user/auth","/user/ConfirmAccount/**","/user/forgot-password/**",
-                                        "/user/RegisterTeacher/**","/user/ConfirmTeacher/**",
-                                        "/teachers/**","/teachers/deleteTeacher/**","/file","/demandeDeCours","/demandeDeCours/**",
+                                        "/user/RegisterTeacher/**","/user/ConfirmTeacher/**","/user/ConfirmDemande/**",
+                                        "/teachers/**","/teachers/deleteTeacher/**","/file","/demandeDeCours","/demandeDeCours/ConfirmDemand/**"
+                                        ,"/demandeDeCours/**",
                                         "/adresses","/adresses/**","/etudiants","/etudiants/**","/matieres","/matieres/**",
                                         "/niveauEtudes","/niveauEtudes/**","/paiements","/paiements/**",
                                         "/recommendations","/recommendations/**","/regions","/regions/**",

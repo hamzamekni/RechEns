@@ -33,7 +33,7 @@ public class MatiereServiceImpl implements MatiereService {
     public Matiere updateMatiere(Long id, Matiere updatedMatiere) {
         Matiere existingMatiere = matiereRepository.findById(id).orElse(null);
         if (existingMatiere != null) {
-            updatedMatiere.setMatiere_Id(existingMatiere.getMatiere_Id());
+            updatedMatiere.setMatiereId(existingMatiere.getMatiereId());
             return matiereRepository.save(updatedMatiere);
         }
         return null;

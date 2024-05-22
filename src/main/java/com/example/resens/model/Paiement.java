@@ -35,7 +35,7 @@ public class Paiement {
     private Teacher teacher;
 
     @ManyToOne
-    @JoinColumn(name = "etudiant_id", referencedColumnName = "etudiant_id")
+    @JoinColumn(name = "etudiantId", referencedColumnName = "etudiantId")
     private Etudiant etudiant;
 
 }

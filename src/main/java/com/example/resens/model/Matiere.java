@@ -15,7 +15,7 @@ public class Matiere {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long matiere_Id;
+    private Long matiereId;
 
     @NonNull
     private String matiere_name;

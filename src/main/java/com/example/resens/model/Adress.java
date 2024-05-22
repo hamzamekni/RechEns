@@ -17,7 +17,7 @@ import java.util.Set;
 public class Adress {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long adress_Id;
+    private Long adressId;
     @NonNull
     private String road_adress;
 

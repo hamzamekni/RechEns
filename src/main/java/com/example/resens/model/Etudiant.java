@@ -16,7 +16,7 @@ public class Etudiant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long etudiant_Id;
+    private Long etudiantId;
 
     @NonNull
     private Float Montant;

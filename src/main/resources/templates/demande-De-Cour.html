@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+        @media screen {
+            @font-face {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 400;
+                src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v11/qIIYRU-oROkIk8vfvxw6QvesZW2xOQ-xsNqO47m55DA.woff) format('woff');
+            }
+
+            @font-face {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 700;
+                src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.com/s/lato/v11/qdgUG4U09HnJwhYI-uK18wLUuEpTyoUstqEm5AMlJo4.woff) format('woff');
+            }
+        }
+
+        body {
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            font-family: 'Lato', Helvetica, Arial, sans-serif;
+        }
+
+        table {
+            border-collapse: collapse !important;
+        }
+
+        img {
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        h1 {
+            font-size: 28px;
+            line-height: 32px;
+            margin: 0;
+            padding-bottom: 10px;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 24px;
+            margin: 0;
+        }
+
+        .button {
+            background-color: #FF7A00;
+            color: #ffffff;
+            padding: 15px 30px;
+            border-radius: 8px;
+            display: inline-block;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+            transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .button:hover {
+            background-color: #e66a00;
+            box-shadow: 0 5px 8px rgba(0, 0, 0, 0.25), 0 5px 8px rgba(0, 0, 0, 0.25);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 4px;
+        }
+
+        /* Media queries for responsiveness */
+        @media screen and (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 24px;
+                line-height: 28px;
+            }
+
+            p, .button {
+                font-size: 14px;
+            }
+
+            .button {
+                padding: 12px 20px;
+            }
+        }
+    </style>
+    <title>Success Page</title>
+    <!-- Include Tailwind CSS -->
+    <link th:href="@{https://cdn.tailwindcss.com/3.3.2}" rel="stylesheet">
+    <!-- Include Alpine.js -->
+    <script th:src="@{https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js}"></script>
+</head>
+<body>
+<div class="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-50 py-10">
+    <div class="max-h-full w-full max-w-xl overflow-y-auto sm:rounded-2xl bg-white">
+        <div class="w-full">
+            <div class="m-8 my-20 max-w-[400px] mx-auto">
+                <div class="mb-8">
+                    <h1 class="mb-4 text-3xl font-extrabold">You'v Been Sent A demand De Cour From <em th:text="${etudiant_username}"></em> </h1>
+                    <p class="text-gray-600">This is his/her information you can send him/her the cours on it
+                    </p>
+                    <p th:text="${etudiant_email}"> Email </p>
+                    <p th:text="${etudiant_phoneNumber}"> Phone Number </p>
+                </div>
+                <div class="space-y-4">
+                    <a class="button" th:href="@{'http://localhost:4200'}" target="_blank">Sign in</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -24,7 +24,7 @@ public class Recommendation {
     private String recommandation;
 
     @ManyToOne
-    @JoinColumn(name = "etudiant_id", referencedColumnName = "etudiant_id")
+    @JoinColumn(name = "etudiantId", referencedColumnName = "etudiantId")
     private Etudiant etudiant;
 
     @ManyToOne
