@@ -54,8 +54,8 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                 .authorizeHttpRequests(req ->
                         req.requestMatchers( "/user/Register","/user/auth","/user/ConfirmAccount/**","/user/forgot-password/**",
                                         "/user/RegisterTeacher/**","/user/ConfirmTeacher/**","/user/ConfirmDemande/**",
-                                        "/teachers/**","/teachers/deleteTeacher/**","/file","/demandeDeCours","/demandeDeCours/ConfirmDemand/**"
-                                        ,"/demandeDeCours/**",
+                                        "/teachers/**","/teachers/deleteTeacher/**","/file","/demandeDeCours","/demandeDeCours/ConfirmDemand/**",
+                                        "/demandeDeCours/deleteDemande/**","/demandeDeCours/**",
                                         "/adresses","/adresses/**","/etudiants","/etudiants/**","/matieres","/matieres/**",
                                         "/niveauEtudes","/niveauEtudes/**","/paiements","/paiements/**",
                                         "/recommendations","/recommendations/**","/regions","/regions/**",

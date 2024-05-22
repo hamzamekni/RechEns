@@ -54,7 +54,7 @@ public class DemandeDeCourController {
         return demandeDeCourService.updateDemandeDeCour(id, updatedDemandeDeCour);
     }
 
-    @DeleteMapping("/{id}")
+    @GetMapping("/deleteDemande/{id}")
     public void deleteDemandeDeCour(@PathVariable Long id) {
         demandeDeCourService.deleteDemandeDeCour(id);
     }

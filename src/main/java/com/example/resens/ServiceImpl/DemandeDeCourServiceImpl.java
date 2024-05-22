@@ -23,6 +23,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class DemandeDeCourServiceImpl implements DemandeDeCourService {
     private static final String CONFIRMATION_URL = "http://localhost:8081/demandeDeCours/ConfirmDemand/%s";
+    private static final String DELETE_DEMANDE_URL = "http://localhost:8081/demandeDeCours/%s";
     @Autowired
     private DemandeDeCourRepository demandeDeCourRepository;
     @Autowired
@@ -121,7 +122,8 @@ public class DemandeDeCourServiceImpl implements DemandeDeCourService {
                     demande.getMatiere().getMatiere_name(),
                     demande.getAdress().getRoad_adress(),
                     "confirmed-demande",
-                    String.format(CONFIRMATION_URL,demande.getDemandeDeCour_Id())
+                    String.format(CONFIRMATION_URL,demande.getDemandeDeCour_Id()),
+                    demande.getDemandeDeCour_Id()
             );
         } catch (MessagingException e) {
             e.printStackTrace();
