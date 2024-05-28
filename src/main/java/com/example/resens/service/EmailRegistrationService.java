@@ -117,7 +117,7 @@ public class EmailRegistrationService {
     }
 
     public void send(String mail, String titreDemande, String detailDemande,
-                     String firstName, String firstName1, String matiere, String adress, String templateName, String confirmationUrl, Long deleteUrl) throws MessagingException {
+                     String firstName, String firstName1, String matiere, String templateName, String confirmationUrl, Long deleteUrl) throws MessagingException {
 
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(
@@ -131,7 +131,6 @@ public class EmailRegistrationService {
         properties.put("etudiantFirstName", firstName);
         properties.put("teacherFirstName", firstName1);
         properties.put("matiere", matiere);
-        properties.put("adress", adress);
         properties.put("demandeId",deleteUrl);
         properties.put("confirmationUrl", confirmationUrl);
         Context context = new Context();

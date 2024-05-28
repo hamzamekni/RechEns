@@ -30,10 +30,6 @@ public class DemandeDeCour {
     private Statut_Demande statutDemande;
 
     @ManyToOne
-    @JoinColumn(name = "adressId", referencedColumnName = "adressId")
-    private Adress adress;
-
-    @ManyToOne
     @JoinColumn(name = "matiereId", referencedColumnName = "matiereId")
     private Matiere matiere;
 

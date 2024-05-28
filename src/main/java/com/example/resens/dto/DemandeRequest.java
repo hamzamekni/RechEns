@@ -23,7 +23,6 @@ public class DemandeRequest {
     private Float prix_max;
     private Float prix_min;
     private Statut_Demande statutDemande;
-    private Long adressId;
     private Long matiereId;
     private Long etudiantId;
     private Long teacherId;

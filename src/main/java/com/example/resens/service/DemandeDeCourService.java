@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DemandeDeCourService {
-    DemandeDeCour saveDemandeDeCour(DemandeDeCour demandeDeCour, Long adress_id, Long matiere_id,
+    DemandeDeCour saveDemandeDeCour(DemandeDeCour demandeDeCour, Long matiere_id,
                                     Long etudiant_id,
                                     Long teacherId);
     DemandeDeCour updateDemandeDeCour(Long id, DemandeDeCour updatedDemandeDeCour);
@@ -18,5 +18,5 @@ public interface DemandeDeCourService {
 
 
     void demadeForm(DemandeRequest demandeRequest, Statut_Demande statutDemande,
-                    Long teacher, Long etudiant, Long matiere, Long adress);
+                    Long teacher, Long etudiant, Long matiere);
 }

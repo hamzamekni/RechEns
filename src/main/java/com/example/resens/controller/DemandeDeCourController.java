@@ -41,10 +41,10 @@ public class DemandeDeCourController {
 
     @PostMapping
     public DemandeDeCour saveDemandeDeCour(@RequestBody DemandeDeCour demandeDeCour,
-                                           @RequestParam Long adress_id, Long matiere_id,
+                                           Long matiere_id,
                                            @RequestParam Long etudiant_id,
                                            @RequestParam Long teacherId) {
-        return demandeDeCourService.saveDemandeDeCour(demandeDeCour, adress_id, matiere_id,
+        return demandeDeCourService.saveDemandeDeCour(demandeDeCour, matiere_id,
                                                                                 etudiant_id,
                                                                                 teacherId);
     }
@@ -76,7 +76,7 @@ public class DemandeDeCourController {
             RegisterResponse registerResponse = new RegisterResponse();
             try {
                 demandeDeCourService.demadeForm(demandeRequest, Statut_Demande.IN_PROGRESS, demandeRequest.getTeacherId(),
-                        demandeRequest.getEtudiantId(), demandeRequest.getMatiereId(), demandeRequest.getAdressId());
+                        demandeRequest.getEtudiantId(), demandeRequest.getMatiereId());
                 registerResponse.setMessageResponse("Demand Created");
                 return ResponseEntity.status(HttpStatus.CREATED).body(registerResponse);
             } catch (UserException e) {

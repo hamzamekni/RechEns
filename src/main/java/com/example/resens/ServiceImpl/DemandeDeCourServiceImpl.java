@@ -41,19 +41,15 @@ public class DemandeDeCourServiceImpl implements DemandeDeCourService {
 
 
     @Override
-    public DemandeDeCour saveDemandeDeCour(DemandeDeCour demandeDeCour, Long adress_id, Long matiere_id,
+    public DemandeDeCour saveDemandeDeCour(DemandeDeCour demandeDeCour, Long matiere_id,
                                            Long etudiant_id,
                                            Long teacherId) {
         Optional<Etudiant> optionalEtudiant = etudiantRepository.findById(etudiant_id);
         Optional<Teacher> optionalTeacher = teacherRepository.findById(teacherId);
-        Optional<Adress> optionalAdress = adressRepository.findById(adress_id);
         Optional<Matiere> optionalMatiere = matiereRepository.findById(matiere_id);
 
         if (optionalEtudiant.isPresent()){
             demandeDeCour.setEtudiant(optionalEtudiant.get());
-        }
-        if (optionalAdress.isPresent()){
-            demandeDeCour.setAdress(optionalAdress.get());
         }
         if (optionalMatiere.isPresent()){
             demandeDeCour.setMatiere(optionalMatiere.get());
@@ -92,10 +88,9 @@ public class DemandeDeCourServiceImpl implements DemandeDeCourService {
     @Transactional
     @Override
     public void demadeForm(DemandeRequest demandeRequest, Statut_Demande statutDemande,
-                          Long teacherId, Long etudiantId, Long matiereId, Long adressId) {
+                          Long teacherId, Long etudiantId, Long matiereId) {
         Etudiant optionalEtudiant = etudiantRepository.findByEtudiantId(etudiantId);
         Teacher optionalTeacher = teacherRepository.findByTeacherId(teacherId);
-        Adress optionalAdress = adressRepository.findByAdressId(adressId);
         Matiere optionalMatiere = matiereRepository.findByMatiereId(matiereId);
 
         var demande = DemandeDeCour.builder()
@@ -105,7 +100,6 @@ public class DemandeDeCourServiceImpl implements DemandeDeCourService {
                 .statutDemande(statutDemande)
                 .prix_max(demandeRequest.getPrix_max())
                 .prix_min(demandeRequest.getPrix_min())
-                .adress(optionalAdress)
                 .matiere(optionalMatiere)
                 .etudiant(optionalEtudiant)
                 .teacher(optionalTeacher)
@@ -120,7 +114,6 @@ public class DemandeDeCourServiceImpl implements DemandeDeCourService {
                     demande.getEtudiant().getUsers().getFirstName(),
                     demande.getTeacher().getFirstName(),
                     demande.getMatiere().getMatiere_name(),
-                    demande.getAdress().getRoad_adress(),
                     "confirmed-demande",
                     String.format(CONFIRMATION_URL,demande.getDemandeDeCour_Id()),
                     demande.getDemandeDeCour_Id()
